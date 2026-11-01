@@ -1,0 +1,608 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage[hidelinks]{hyperref}
+\usepackage{amssymb}
+\usepackage[
+    left=2.15cm,
+    right=2.15cm,
+    top=1.90cm,
+    bottom=1.90cm
+]{geometry}
+
+
+\title{Mathematical Tools for Economists}
+\author{Leroy Zahno}
+\date{Autumn Semester 2026}
+
+\newtheorem{theorem}{Theorem}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+
+\theoremstyle{Solution}
+\newtheorem{solution}{Solution}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Vocabulary}
+
+\begin{definition}[Theorem]
+A \textit{theorem} is a statement that is true and has been proved to be true. 
+\end{definition}
+
+\begin{definition}[Proposition]
+A statement that is true but not as significant as a theorem is sometimes called a \textit{proposition}. 
+\end{definition}
+
+\begin{definition}[Lemma]
+A \textit{lemma} is a theorem whose main purpose is to help prove another theorem. 
+\end{definition}
+
+\begin{definition}[Corollary]
+A \textit{corollary} is a result that is an immediate consequence of a theorem or proposition.
+\end{definition}
+
+\section{Basic Calculus and Analysis}
+
+\begin{definition}[Classes of differentiability]
+Let $U \subseteq \textbf{R}^n$ be open and let $f:U \rightarrow \textbf{R}^m$. A function $f$ is called continuous if
+
+\begin{equation}
+	\lim_{\textbf{y} \rightarrow \textbf{x}} f(\textbf{y}) = f(\textbf{x})
+\end{equation}
+
+for every $\textbf{x} \in U$. Such a function is said to be of class $C^0$. A function $f$ is called differentiable if its derivative exists at every point of $U$. For an integer $k \geq 1$, the function $f$ is said to be of class $C^k$ if all partial derivatives of order at most $k$ exist and are continuous on $U$. In particular, $C^1$ describes continuous first derivatives; $C^2$ describes continuous first and second derivatives, and so on. A function belonging to $C^\infty$ has continuous derivatives of every order and is called smooth.
+\end{definition}
+
+\begin{definition}[Left-hand limit]
+Let $f:D_f \rightarrow \mathbb{R}$, $x \mapsto y=f(x)$, be a function and let $x_0 \in \mathbb{R}$. We say that $f(x)$ converges to $L \in \mathbb{R}$ as $x$ approaches $x_0$ from the left if, for every sequence $\{x_n\}_{n \in \mathbb{N}}$ with $x_n \in D_f$, $x_n < x_0$, and
+
+\begin{equation}
+	\lim_{n \rightarrow \infty} x_n = x_0,
+\end{equation}
+
+the sequence $\{y_n\}_{n \in \mathbf{N}}$, defined by $y_n=f(x_n)$, converges to $L$. This is written as
+
+\begin{equation}
+	\lim_{x \nearrow x_0} f(x)=L
+	\qquad
+	\left(\text{or } \lim_{x \rightarrow x_0^-}f(x)=L\right).
+\end{equation}
+
+The number $L$ is called the left-hand limit of $f$ at $x_0$.
+\end{definition}
+
+\begin{definition}[Right-hand limit]
+Let $f:D_f \rightarrow \mathbb{R}$, $x \mapsto y=f(x)$, be a function and let $x_0 \in \mathbb{R}$. We say that $f(x)$ converges to $R \in \mathbb{R}$ as $x$ approaches $x_0$ from the right if, for every sequence $\{x_n\}_{n \in \mathbb{N}}$ with $x_n \in D_f$, $x_n > x_0$, and
+
+\begin{equation}
+	\lim_{n \rightarrow \infty} x_n = x_0,
+\end{equation}
+
+the sequence $\{y_n\}_{n \in \mathbf{N}}$, defined by $y_n=f(x_n)$, converges to $R$. This is written as
+
+\begin{equation}
+	\lim_{x \searrow x_0} f(x)=R
+	\qquad
+	\left(\text{or } \lim_{x \rightarrow x_0^+}f(x)=R\right).
+\end{equation}
+
+The number $R$ is called the right-hand limit of $f$ at $x_0$.
+\end{definition}
+
+\begin{definition}[Limit]
+Let $f:D_f \rightarrow \mathbb{R}$, $x \mapsto y=f(x)$, be a function and let $x_0 \in \mathbb{R}$. We say that $f(x)$ converges to $y_0 \in \mathbb{R}$ as $x$ approaches $x_0$ if $f(x)$ converges to $y_0$ both from the left and from the right. In this case, one writes
+
+\begin{equation}
+	\lim_{x \rightarrow x_0}f(x)=y_0
+	=
+	\lim_{x \searrow x_0}f(x)
+	=
+	\lim_{x \nearrow x_0}f(x).
+\end{equation}
+
+The number $y_0$ is called the limit of $f$ as $x$ approaches $x_0$.
+\end{definition}
+
+\begin{definition}[Differentiable function and its derivative]
+Let $f:D_f \rightarrow \mathbb{R}$, $x \mapsto y=f(x)$, be a function, let $I \subseteq D_f$ be an open interval, and let $x_0 \in I$. The function $f$ is called differentiable at $x_0$ if the limit
+
+\begin{equation}
+	\lim_{\Delta x \rightarrow 0}
+	\frac{f(x_0+\Delta x)-f(x_0)}{\Delta x}
+\end{equation}
+
+exists. In this case, the limit is denoted by
+
+\begin{equation}
+	\frac{d}{dx}f(x_0)
+\end{equation}
+
+or
+
+\begin{equation}
+	f'(x_0),
+\end{equation}
+
+and is called the \textit{difference quotient} or the \textit{derivative} of the function $f$ at $x_0$.
+\end{definition}
+
+\section{Unconstrained Optimization}
+
+\begin{definition}[Interior Point] $\mathbf{x}^*$ is an interior point of the domain of $F$ if there exists $r>0$ such that the whole ball $B_r(\mathbf{x}^*)$ is contained in the domain of $F$.
+\end{definition}
+
+\begin{definition}[Global and local maxima and minima] Let $F: U \mathbf{ \rightarrow R^1}$ be a real-valued function of $n$ variables, whose domain $U$ is a subset of $\mathbb{R}^n$.
+\begin{enumerate}
+	\item A point $\textbf{x}^* \in U$ is a $\textbf{max}$ of $F$ on $U$ if $F(\textbf{x}^*) \geq F(\textbf{x})$ for all $\textbf{x} \in U$.
+	\item $\textbf{x}^* \in U$ is a $\textbf{strict max}$ if $\textbf{x}^*$ is a max and $F(\textbf{x}^*) \textgreater F(\textbf{x})$ for all $\textbf{x} \neq \textbf{x}^*$ in $U$.
+	\item $\textbf{x}^* \in U$ is a $\textbf{local (or relative) max}$ of $F$ if there is a ball $B_r(\textbf{x}^*)$ about $\textbf{x}^*$ such that $F(\textbf{x}^*) \geq F(\textbf{x})$ for all $\textbf{x} \in B_r(\textbf{x}^*) \cap U$.
+	\item $\textbf{x}^* \in U$ is a $\textbf{strict local max}$ of $F$ if there is a ball $B_r(\textbf{x}^*)$ about $\textbf{x}^*$ such that $F(\textbf{x}^*) \textgreater F(\textbf{x})$ for all $\textbf{x} \neq \textbf{x}^* \in B_r(\textbf{x}^*) \cap U$.
+\end{enumerate}
+
+If we want to emphasize that a point $\textbf{x}^*$ is a max of $F$ on the whole domain of $U$, we call $\textbf{x}^*$ a $\textbf{global max}$ or $\textbf{absolute max}$ of $F$ on $U$.
+\end{definition}
+
+\begin{theorem}
+Let $F: U \mathbf{ \rightarrow R^1}$ be a $C^1$ function defined on a subset $U$ of $\mathbb{R}^n$. If $\mathbf{x}^*$ is a local max or min of $F$ in $U$ and if $\mathbf{x}^*$ is an interior point of $U$, then
+ \end{theorem}
+
+\begin{align}
+\frac{\partial F}{\partial x_i}(\mathbf{x}^*)=0 \quad \text{for} \quad i=1,...,n.
+\end{align}
+
+\begin{definition}[Critical Point] The $n$-vector $\mathbf{x}^*$ is a $\textbf{critical point}$ of a function $F(x_1,...,x_n)$ if it satisfies (1).
+\end{definition}
+
+\begin{theorem} 
+Let $F: U \mathbf{ \rightarrow R^1}$ be a $C^2$ function whose domain is a convex open subset $U$ of $\mathbb{R}^n$.
+\begin{enumerate}
+	\item The following three conditions are equivalent:
+	\begin{enumerate}
+		\item $F$ is a concave function of $U$; and
+		\item $F(\textbf{y})-F(\textbf{x}) \leq DF(\textbf{x})(\textbf{y}-\textbf{x})$ for all $\textbf{x},  \textbf{y} \in U$: and
+		\item $D^2F(\textbf{x})$ is negative semidefinite for all $\textbf{x} \in U$
+	\end{enumerate}
+	\item The following three conditions are equivalent:
+	\begin{enumerate}
+		\item $F$ is a convex function on $U$; and 
+		\item $F(\textbf{y})-F(\textbf{x}) \geq DF(\textbf{x})(\textbf{y}-\textbf{x})$ for all $\textbf{x},  \textbf{y} \in U$: and
+		\item $D^2F(\textbf{x})$ is positive semidefinite for all $\textbf{x} \in U$
+	\end{enumerate}
+	\item If $F$ is a concave function on $U$ and $DF(\textbf{x}^*)=\mathbf{0}$ for some $\textbf{x}^* \in U$, then $\textbf{x}^*$ is a $\textit{global max}$ of $F$ on $U$.
+	\item If $F$ is a convex function on $U$ and $DF(\textbf{x}^*)=\mathbf{0}$ for some $\textbf{x}^* \in U$, then $\textbf{x}^*$ is a $\textit{global min}$ of $F$ on $U$.
+\end{enumerate}
+\end{theorem}
+
+\begin{definition}[Convex Set]
+A set $u$ is a $\textbf{convex set}$ if whenever $\textbf{x}$ and $\textbf{y}$ are points in $U$, the line segment joining $\textbf{x}$ and $\textbf{y}$,
+
+\begin{equation}
+	\ell(\textbf{x,y}) \equiv {(t\textbf{x}+(1-t)\textbf{y}:0 \leq t \leq 1},
+\end{equation}
+
+is also in $U$. 
+\end{definition}
+
+\begin{definition}
+(Definite, semidefinite): Positive definite means $x \textgreater 0$; positive semidefinite means $x \geq 0$.
+\end{definition}
+
+\section{Constrained Optimization}
+
+\begin{theorem} Let $f$ and $h$ be $C^1$ functions of two variables. Suppose that $\textbf{x}^*=(x_1^*,x_2^*)$ is a solution of the problem
+
+\begin{equation}
+	\begin{aligned}
+		\max_{x_1,x_2}f(x_1,x_2), \quad \text{subject to} \quad h(x_1,x_2)=c
+	\end{aligned}
+\end{equation}
+
+Suppose further that $(x_1^*,x_2^*)$ is not a critical point of $h$. Then, there is a real number $\mu^*$ such that $(x_1^*,x_2^*,\mu^*)$ is a critical point of the Langrangian function
+
+\begin{equation}
+	\begin{aligned}
+		L(x_1,x_2,\mu) \equiv f(x_1,x_2)-\mu[h(x_1,x_2)-c].
+	\end{aligned}
+\end{equation}
+
+In other words, at $(x_1^*,x_2^*,\mu^*)$
+
+\begin{equation}
+	\begin{aligned}
+		\frac{\partial L}{\partial x_1}=0, \quad \frac{\partial L}{\partial x_2}=0, \quad \frac{\partial L}{\partial \mu}=0.
+	\end{aligned}
+\end{equation}
+\end{theorem}
+
+\begin{definition}[Binding constraint]
+If the maximizer $\textbf{p}$ lies on the boundary of the constraint set $h(x_1,x_2)$, we say the constraint is binding (or is active, effective, or tight) at $\textbf{p}$. 
+\end{definition}
+
+\begin{definition}[Not binding constraint] If the maximizer is in the interior of the constraint set, we say that the constraint is not binding (inactive, ineffective, loose) at $\textbf{p}$.
+\end{definition}
+
+\section{Homogenous and Homothetic Functions}
+
+\begin{definition}[Homogenous of degree k] For any scalar $k$, a real-valued function $f(x_1,...,x_n)$ is homogenous of degree $k$ if
+\begin{equation}
+	 f(tx_1,...,tx_n)=t^kf(x_1,...,x_n) \quad \text{for all} \quad x_1,...,x_n \quad \text{and all} \quad t \textgreater 0.
+\end{equation}
+\end{definition}
+
+\begin{theorem} 
+Let $z=f(\textbf{x})$ be a $C^1$ function on an open cone in $\mathbb{R}^n$. If $f$ is homogenous of degree $k$, its first order partial derivatives are homogenous of degree $k-1$.
+\end{theorem}
+
+\begin{definition}[Cone]
+A cone is a set with the property that whenever $\textbf{x}$ is in the set, every positive scalar multiple $t\textbf{x}$ of $\textbf{x}$ is in the set.
+\end{definition}
+
+\begin{definition}[Marginal Rate of Substitution]
+The marginal rate of substitution (MRS) describes how many units of good $Y$ a consumer is willing to trade for one additional unit of good $X$. It is the quotient of the marginal utility functions. This means it tells us how much higher the utility of $X$ is compared to that of $Y$ 
+\begin{equation}
+	MRS: \quad \left.\frac{dY}{dX}\right|_{\hat X,\hat Y} = - \frac{\partial U(\hat X, \hat Y)/ \partial X}{\partial U(\hat X, \hat Y)/ \partial Y}
+\end{equation}
+\end{definition}
+
+\begin{definition}[Marginal Rate of Technical Substitution]
+The marginal rate of technical substitution (MRTS) is the same as MRS, but with a output-function instead of utility.
+\end{definition}
+
+\begin{definition}[Income Expansion Path]
+The income expansion path is the parametrized curve $I \mapsto \textbf{x}(I)$ that indicates the bundle $(x_1,...,x_n)$ demanded for different income levels. 
+\end{definition}
+
+\begin{theorem}
+ Let $U(\textbf{x})$ be a utility function on $\mathbb{R}^n_+$ that is homogenous of degree $k$. Then,
+\begin{enumerate}
+	\item the MRS is constant along the rays from the origin,
+	\item income expansion paths are rays from the origin,
+	\item the corresponding demand depends linearly on income, and
+	\item the income elasticity of demand is identically 1.
+\end{enumerate}
+Let $q=f(\textbf{x})$ be a production function on $\mathbb{R}^n_+$ that is homogenous of degree $k$. Then, 
+\begin{enumerate}
+	\item the MRTS is constant along rays from the origin, and
+	\item the corresponding cost function is homogenous of degree $1/k: C(q)=bq^{1/k}$.
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem} ($\textbf{Euler's Theorem}$) $\quad$ Let $f(\textbf{x})$ be a $C^1$ homogenous function of degree $k$ on $\mathbb{R}^n_+$. Then, for all $\textbf{x}$, 
+
+\begin{equation}
+	x_1\frac{\partial f}{\partial x_1}(\textbf{x})+x_2\frac{\partial f}{\partial x_2}(\textbf{x})+...+x_n\frac{\partial f}{\partial x_n}(\textbf{x})=kf(\textbf{x}),
+\end{equation}
+
+or, in gradient notation,
+
+\begin{equation}
+	\textbf{x} \cdot \nabla f(\textbf{x})=kf(\textbf{x}),
+\end{equation}
+
+or, similarly,
+
+\begin{equation}
+	\begin{pmatrix}
+		x_1\\
+		\vdots\\
+		x_n
+	\end{pmatrix}
+	\begin{pmatrix}
+		F_{x1}(\textbf{x})\\
+		\vdots\\
+		F_{xn}(\textbf{x})
+	\end{pmatrix}
+	=
+	kF(x_1,\ldots,x_n).
+\end{equation}
+\end{theorem}
+
+\begin{theorem}[Wicksell's Law]
+If \(f\) is homogeneous of degree 1 and has diminishing marginal product in \(x_1\), then applying Euler to \(f_{x1}\) yields
+
+\[
+0=x_1f_{x1x1}+x_2f_{x2x1} 
+\]
+
+\[
+\Rightarrow f_{x2x1}=-\frac{x_1f_{x1x1}}{x_2} > 0
+\]
+
+Hence the marginal product of one factor increases when the other factor increases.
+\end{theorem}
+
+
+\begin{theorem}[Homogenizing a function]
+Let $(x_1,...,x_n)\mapsto f(x_1,...,x_n)$ be a real-valued function defined on a cone $C$ in \(\mathbb{R}^n\). Let \(k\) be an integer. Define a new function $F$ of $n+1$ variables by 
+
+\begin{equation}
+	F(x_1,...,x_n,z)=z^k\cdot f \left(\frac{x_1}{z},...,\frac{x_n}{z}\right).
+\end{equation}
+
+Then, $F$ is a homogenous function of degree $k$ on the cone $C \times \mathbb{R}_+$ in $\mathbb{R}^{n+1}$. Since $f(\textbf{x})=F(\textbf{x},1)$ for all $\textbf{x} \in C$, we can consider $f$ as the restriction of $F$ to an $n$-dimensional subset of $\mathbb{R}^{n+1}$.
+\end{theorem}
+
+\vspace{1em}
+
+Proposition 3.1 (Radial expansions): The level sets of a homogenous (production) function are radial expansions and contractions of each other.
+
+\vspace{1em}
+
+\begin{definition}[Monotonously decreasing function] $f$ is monotonously falling if $f(x) \geq f(x') \forall x,x' \in X$ such that $x \leq x'$.
+\end{definition}
+
+\begin{definition}[Monotonic transformation] 
+Let $I$ be an interval on the real line. Then, $g:I\rightarrow \textbf{R}$ is a $\textbf{monotonic transformation}$ of $I$ if $g$ is a strictly increasing function on $I$. Furthermore, if $g$ is a monotonic transformation and $u$ is a real-valued function of $n$ variables, then we say that
+
+\begin{equation}
+	g \circ u: \mathbf{x} \mapsto g(u(\mathbf{x}))
+\end{equation}
+
+is a $\textbf{monotonic transformation of u}$. For instance, the functions $3z+2, \quad z^2, \quad e^z, \quad \text{and} \quad \text{ln} z$ are all monotonic transformations of $\mathbb{R}_{++}$. Consequently, the utility functions $3xy+2, \quad (xy)^2, \quad e^{xy}, \quad \text{and} \quad \text{ln} x+\text{ln} y$ are monotonic transformations of the utility function $u(x,y)=xy$.
+\end{definition}
+
+\begin{definition}[Ordinal and cardinal]
+A characteristic of functions is called ordinal if every monotonic transformation of a function with this characteristic still has that characteristic. Cardinal properties are not preserved by monotonic transformations.
+\end{definition}
+
+\begin{definition}[Homothetic function]
+A function $v: \mathbb{R}^n_+ \rightarrow \mathbb{R}$ is called $\textbf{homothetic}$ if it is a monotone transformation of a homogenous function, that is, if there is a monotonic transformation $z \mapsto g(z)$ of $\mathbb{R}_+$ and a homogenous function $u:\mathbb{R}^n_+ \rightarrow \mathbb{R}_+$ such that $v(\textbf{x})=g(u(\textbf{x}))$ for all $\textbf{x}$ in the domain.
+\end{definition}
+
+\begin{theorem} 
+Let $u: \mathbb{R}^n_+ \rightarrow \textbf{R}$ be a strictly monotonic function. Then, $u$ is homothetic if and only if for all $\textbf{x}$ and $\textbf{y}$ in $\mathbb{R}^n_+$,
+
+\begin{equation}
+	u(\textbf{x}) \geq u(\textbf{y}) \quad \Leftrightarrow \quad u(\alpha \textbf{x}) \geq u(\alpha \textbf{y}) \quad \forall \quad \alpha > 0.
+\end{equation}
+\end{theorem}
+
+\section{Concave and Quasiconcave Functions}
+
+\begin{theorem}[Convex domain]
+Concave and convex functions are required to have convex domains. They contain every line segment between any two points in the set:
+
+\begin{equation}
+x_1,x_2 \in C, \quad 0 \leq \theta \leq 1 \Rightarrow \theta x_1+(1-\theta)x_2 \in C.
+\end{equation}
+\end{theorem}
+
+\begin{definition}[Concave and convex $n$-dimensional functions]
+A real-valued function $f$ defined on a convex subset $U$ of $\mathbb{R}^n$ is $\textbf{concave}$ if for all $\textbf{x, y}$ in $U$ and for all $t$ between $0$ and $1$,
+
+\begin{equation}
+	f(t\mathbf{x}+(1-t)\textbf{y}) \geq tf(\textbf{x})+(1-t)f(\textbf{y}).
+\end{equation}
+
+A real-valued function $g$ defined on a convex subset $U$ of $\mathbb{R}^n$ is $\textbf{convex}$ if for all $\textbf{x, y}$ in $U$ and for all $t$ between $0$ and $1$,
+
+\begin{equation}
+	g(t\mathbf{x}+(1-t)\textbf{y}) \leq tg(\textbf{x})+(1-t)g(\textbf{y}).
+\end{equation}
+\end{definition}
+
+\begin{theorem} 
+Let $f$ be a $C^1$ function on an interval $I$ in $\textbf{R}$. Then, $f$ is concave on $I$ if and only if
+
+\begin{equation}
+	f(y)-f(x) \leq f'(x)(y-x) \quad \text{for all} x,y \in I.
+\end{equation}
+
+The function $f$ is convex on $I$ if and only if
+
+\begin{equation}
+		f(y)-f(x) \geq f'(x)(y-x) \quad \text{for all} x,y \in I.
+\end{equation}
+\end{theorem}
+
+\begin{theorem}
+Let $f$ be a $C^1$ function on a convex subset $U$ of $\mathbb{R}^n$. Then, $f$ is concave on $U$ if and only if for all $\textbf{x, y}$ in $U$:
+
+\begin{equation}
+	f(\textbf{y})-f(\textbf{x}) \leq Df(\textbf{x})(\textbf{y}-\textbf{x});
+\end{equation}
+
+that is,
+
+\begin{equation}
+	f(\textbf{y})-f(\textbf{x}) \leq \frac{\partial f}{\partial x_1}(\textbf{x})(y_1-x_1) +...+\frac{\partial f}{\partial x_n}(\textbf{x})(y_n-x_n).
+\end{equation}
+
+Similarly, $f$ is convex on $U$ if and only if $f(\textbf{y})-f(\textbf{x}) \geq Df(\textbf{x})(\textbf{y}-\textbf{x})$ for all $\textbf{x, y}$ in $U$.
+\end{theorem}
+
+\begin{definition}[Quasiconcavity and Quasiconvexity]
+Let \(f:\mathcal{S}\mapsto\mathbb{R}\).\par
+\begin{enumerate}
+	\item The function \(f\) is quasiconcave on \(\mathcal{S}\) if and only if the upper level set \(C_a^+=\{x\in\mathcal{S}:f(x)\geq a\}\) is a convex set for every \(a\in\mathcal{S}\).
+	\item The function \(f\) is quasiconvex on \(\mathcal{S}\) if and only if the lower level set \(C_a^-=\{x\in\mathcal{S}:f(x)\leq a\}\) is a convex set for every \(a\in\mathcal{S}\).
+\end{enumerate}
+\end{definition}
+
+\section{Difference Equations}
+
+\begin{definition}[Functional Equation]
+A \textit{functional equation} is an equation where the unknown is the function.
+\end{definition}
+
+\begin{definition}[Ordinary difference equation]
+An \textit{ordinary difference equation} is a functional equation involving one or more of the differences $\Delta y, \Delta^2y$, etc. of a function of time.
+\end{definition}
+
+\begin{definition}[Linear, constant-coefficient non-homogenous difference equation]
+The general $n$-th order form of such equations is
+\begin{equation}
+	c_ny_{t+n}+c_{n-1}y_{t+n-1}+...+c_{1}y_{t+1}+c_{0}y_{t}=g(t),
+\end{equation}
+where the $c$'s are given constants and $g(t)$ is a known function.
+\end{definition}
+
+\begin{definition}[Linear, constant-coefficient homogenous difference equation]
+The general $n$-th order form of such equations is
+\begin{equation}
+	c_ny_{t+n}+c_{n-1}y_{t+n-1}+...+c_{1}y_{t+1}+c_{0}y_{t}=0.
+\end{equation}
+\end{definition}
+
+\begin{theorem}[]
+If $y_1(t)$ is a solution of the homogenous equation, then $Ay_1(t)$, where $A$ is an arbitrary constant, is also a solution.
+\end{theorem}
+
+\begin{theorem}[]
+If $y_1(t), y_2(t)$ are two distinct (linearly independent) solutions of the homogenous equation $(n>1)$, then $A_1y_1(t)+A_2y_2(t)$ is also a solution for any two constants $A_1, A_2$.
+\end{theorem}
+
+\begin{theorem}[]
+If $\overline{y}(t)$ is a particular solution of the non-homogenous equation, the general solution of this same equation is obtained adding $\overline{y}(t)$ to the general solution of the corresponding homogenous equation.
+\end{theorem}
+
+\begin{theorem}[General form of first-order non-homogenous equations]
+The general form of these equations is
+\begin{equation}
+	c_1y_t+c_0y_{t-1}=g(t),
+\end{equation}
+where $c_0,c_1$ are given in constants and $g(t)$ is a known function and its general solution is $y_t=A(-b)^t+\overline{y}_t \Leftrightarrow A=\frac{y^*-\overline{y}_{t^*}}{(-b)^{t^*}}$.
+\end{theorem}
+
+\begin{theorem}[General form of first-order homogenous equations]
+The general form of these equations is
+\begin{equation}
+	c_1y_t+c_0y_{t-1}=0,
+\end{equation}
+or
+\begin{equation}
+	y_t+by_{t-1}=0,
+\end{equation}
+where $b\equiv c_0/c_1$ and the solution is $y_t=A(-b)^t \Leftrightarrow A=y^*/(-b)^{t*}.$
+\end{theorem}
+
+\begin{theorem}
+(Monotony and convergence characteristics of the general solution of first-order difference equations with constant coefficients):
+There are only four possible outcomes: Monotonous and convergent $A \in (0,1)$, oscillating and convergent $A \in (-1,0)$, monotonous and divergent $A \in (1,\infty)$, and oscillating and divergent $A \in (-\infty,-1]$.
+\end{theorem}
+
+\begin{theorem}[First-order systems]
+The following is a first order non-homogenous system
+
+\begin{equation}
+\begin{aligned}
+	y_{t+1}&=a_{11}y_{t}+a_{12}z_{t}+g_{1}(t), \\
+	z_{t+1}&=a_{21}y_{t}+a_{22}z_{t}+g_{2}(t),
+\end{aligned}
+\end{equation}
+
+where the coefficients $a_{ij}$ are given constants and $g_1(t),g_2(t)$ are known functions. The corresponding homogenous system is
+
+\begin{equation}
+\begin{aligned}
+	y_{t+1}&=a_{11}y_{t}+a_{12}z_{t}, \\
+	z_{t+1}&=a_{21}y_{t}+a_{22}z_{t}.
+\end{aligned}
+\end{equation}
+
+We solve (37) by solving the second equation for $z_t$, creating a duplicate where time is shifted by one period, taking the first equation in (37) and shifting it too and then substituting the $z$-terms with the ones we just derived. This eventually gives us the second-order difference equation
+
+\begin{equation}
+	y_{t}-(a_{11}+a_{22})y_{t-1}-(a_{12}a_{21}-a_{11}a_{22})y_{t-2}=0
+\end{equation}
+with only one unknown $y_t$.
+\end{theorem}
+
+\begin{solution}[General solution of the homogenous system: Direct method]
+We solve the system from equation (36) directly by taking it's homogenous counterpart and then substituting $y_t=\alpha_1\lambda^t, z_t=\alpha_2\lambda^t$. This gives us
+\begin{equation}
+	\begin{aligned}
+		\alpha_1\lambda^{t+1}&=a_{11}\alpha_1\lambda^t+a_{12}\alpha_2\lambda^t, \\
+		\alpha_2\lambda^{t+1}&=a_{21}\alpha_1\lambda^t+a_{22}\alpha_2\lambda^t.
+	\end{aligned}
+\end{equation}
+This is equivalent to
+\begin{equation}
+	\begin{aligned}
+		\lambda^t[\alpha_1\lambda-a_{11}\alpha_1-a_{12}\alpha_2]&=0, \\
+		\lambda^t[\alpha_2\lambda-a_{21}\alpha_1-a_{22}\alpha_2]&=0,
+	\end{aligned}
+\end{equation}
+leading us to
+\begin{equation}
+	\begin{aligned}
+		\alpha_1(\lambda-a_{11})-a_{12}\alpha_2&=0, \\
+		\alpha_2(\lambda-a_{22})-a_{21}\alpha_1&=0.
+	\end{aligned}
+\end{equation}
+We must invert the sign and take the determinant of the matrix $A$ which represents that consequential system. Remember that the variables $\alpha_1, \alpha_2$ must be dropped out of the equation.
+\begin{equation}
+	\begin{aligned}
+		det(A)&=\left|\begin{matrix}
+			(a_{11}-\lambda) & a_{12} \\ 
+			a_{21} & (a_{22}-\lambda) 
+		\end{matrix} \right| \\
+		&\Leftrightarrow (a_{11}-\lambda)(a_{22}-\lambda)-a_{21}a_{12}=0 \\
+		&\Leftrightarrow a_{11}a_{22}-a_{11}\lambda-\alpha_{22}\lambda+\lambda^2-a_{21}a_{12}=0 \\
+		&\Leftrightarrow \lambda^2-(a_{11}+a_{22})\lambda+(a_{11}a_{22}-a_{21}a_{12})=0.
+	\end{aligned}
+\end{equation}
+The determinantal equation in the first equality and its expanded form are called the characteristic equation of the system of difference equations. From Theorem 18 we know that the constants $a_{ij}$ are known, such that the last equation will give us two solutions $\lambda_1,\lambda_2$.
+\end{solution}
+
+\section{Differential Equations}
+
+\begin{theorem}[General form of first-order non-homogenous equations]
+The general form of these equations is
+\begin{equation}
+	\begin{aligned}
+		\dot{x}(t)=a_{11}x(t)+a_{12}y(t)+g(t), \\
+		\dot{y}(t)=a_{21}x(t)+a_{22}y(t)+g(t),
+	\end{aligned}
+\end{equation}
+where $a_{ij}$ are given constants and $g(t)$ is a known function.
+\end{theorem}
+
+\begin{solution}[General solution of the homogenous system: Direct method]
+We solve the system from equation (43) directly by taking it's homogenous counterpart and setting $x(t)=\alpha_1e^{\lambda t}, y(t)=\alpha_2e^{\lambda t}$. This gives us
+\begin{equation}
+	\begin{aligned}
+		\alpha_1\lambda e^{\lambda t}&=a_{11}\alpha_1e^{\lambda t}+a_{12}\alpha_2e^{\lambda t}, \\
+		\alpha_2\lambda e^{\lambda t}&=a_{21}\alpha_1e^{\lambda t}+a_{22}\alpha_2e^{\lambda t}.
+	\end{aligned}
+\end{equation}
+
+This is equivalent to
+
+\begin{equation}
+	\begin{aligned}
+		e^{\lambda t}[(a_{11}-\lambda)\alpha_1+a_{12}\alpha_2]&=0, \\
+		e^{\lambda t}[a_{21}\alpha_1+(a_{22}-\lambda)\alpha_2]&=0.
+	\end{aligned}
+\end{equation}
+leading us to
+\begin{equation}
+	\begin{aligned}
+		(a_{11}-\lambda)\alpha_1+a_{12}\alpha_2&=0, \\
+		a_{21}\alpha_1+(a_{22}-\lambda)\alpha_2&=0.
+	\end{aligned}
+\end{equation}
+We must take the determinant of the matrix $A$ which represents that consequential system. Remember that the variables $\alpha_1, \alpha_2$ must be dropped out of the equation.
+\begin{equation}
+	\begin{aligned}
+		det(A)&=\left|\begin{matrix}
+			(a_{11}-\lambda) & a_{12} \\ 
+			a_{21} & (a_{22}-\lambda) 
+		\end{matrix} \right| \\
+		&\Leftrightarrow (a_{11}-\lambda)(a_{22}-\lambda)-a_{21}a_{12}=0 \\
+		&\Leftrightarrow a_{11}a_{22}-a_{11}\lambda-\alpha_{22}\lambda+\lambda^2-a_{21}a_{12}=0 \\
+		&\Leftrightarrow \lambda^2-(a_{11}+a_{22})\lambda+(a_{11}a_{22}-a_{21}a_{12})=0.
+	\end{aligned}
+\end{equation}
+The determinantal equation in the first equality and its expanded form are called the characteristic equation of the system of difference equations. From Theorem 18 we know that the constants $a_{ij}$ are known, such that the last equation will give us two solutions $\lambda_1,\lambda_2$.
+\end{solution}
+
+\section{Optimal Control}
+
+
+\end{document}
